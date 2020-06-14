@@ -8,7 +8,7 @@ class Frame
   def shoot(s)
     s = 0 if s == "F"
     validator = Validate.new(s, "min:0|max:10|number")
-    return if (@values[0] && @values[0] + s > 10) || !validator.valid?
+    return false if (@values[0] && @values[0] + s > 10) || !validator.valid?
     @values.push s
   end
 
