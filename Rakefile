@@ -1,3 +1,3 @@
-task :doit do
-  puts "DONE"
+task :test do
+  sh "rspec"
 end
