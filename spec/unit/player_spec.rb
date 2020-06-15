@@ -1,5 +1,3 @@
-require './lib/player'
-
 RSpec.describe Player do
   let(:player) { Player.new }
   describe '#initialize' do

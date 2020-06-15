@@ -1,5 +1,3 @@
-require './lib/validate'
-
 RSpec.describe Validate do
   describe '#initialize' do
     it 'returns Validate object of the class Validate' do

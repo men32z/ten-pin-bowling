@@ -1,39 +1,52 @@
 require "./lib/validate"
 
 class FrameFinal
+  attr_accessor :score
+
   def initialize
     @values = []
+    @score = false
   end
 
   def shoot(s)
     s = 0 if s == "F"
-    validator = Validate.new(s, "min:0|max:10|number")
-    @values.push s if validator.valid? && (!@values[0] || second_shoot_valid(s) || third_shoot_valid(s))
+    validator = Validate.new(s, "min:0|max:#{max_next_value}|number")
+    return false if !validator.valid? || !available_trows?
+    @values.push s
   end
 
   def get_values
     @values
   end
 
+  def available_trows?
+    @values.count < 2 || (@values.count == 2 && third_shoot_valid)
+  end
+
+  def max_next_value
+    max = 10 - @values.sum
+    max += 10 if has_first_strike
+    max += 10 if has_second_strike
+    max += 10 if has_spare
+    max
+  end
+
+  def has_first_strike
+    @values[0] && @values[0] == 10
+  end
+
   private
 
-  def third_shoot_valid(s)
-    @values[1] && (has_first_strike(s) || has_spare || has_two_strikes)
+  def third_shoot_valid
+    @values[1] && (has_first_strike || has_spare)
   end
 
-  def second_shoot_valid(s)
-    @values[0] && !@values[1] && (@values[0] == 10 || @values[0] + s <= 10)
-  end
 
-  def has_first_strike(s)
-    @values[0] == 10 && @values[1] + s <= 10
+  def has_second_strike
+    @values[1] && @values[1] == 10
   end
 
   def has_spare
-    @values[0] + @values[1] == 10
-  end
-
-  def has_two_strikes
-    @values[0] + @values[1] == 20
+    @values[1] && @values[0] + @values[1] == 10
   end
 end

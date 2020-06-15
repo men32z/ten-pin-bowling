@@ -1,6 +1,3 @@
-require './lib/frame'
-require './lib/frame_interface'
-
 RSpec.describe Frame do
   let(:onlyframe ) { Frame.new }
   let(:frame) { FrameInterface.new(Frame.new) }
@@ -38,6 +35,48 @@ RSpec.describe Frame do
       expect(frame.get_values).to eq([5])
       expect(frame.shoot(5)).to be_truthy
       expect(frame.get_values).to eq([5, 5])
+    end
+  end
+
+  describe "#available_trows?" do
+    it "returns true if we haven't  shoot" do
+      expect(frame.available_trows?).to be_truthy
+    end
+    it "returns true if we have one shoot" do
+      frame.shoot(5)
+      expect(frame.available_trows?).to be_truthy
+    end
+    it "returns false if we have two shoots and they are spare" do
+      frame.shoot(5)
+      frame.shoot(5)
+      expect(frame.available_trows?).to_not be_truthy
+    end
+    it "returns false if we have two shoots and they are not spare" do
+      frame.shoot(5)
+      frame.shoot(4)
+      expect(frame.available_trows?).to_not be_truthy
+    end
+
+    it "returns false if we have one strike" do
+      frame.shoot(10)
+      expect(frame.available_trows?).to_not be_truthy
+    end
+  end
+
+  describe "#max_next_value" do
+    it "returns 4 if we have 6 in the first shoot" do
+      frame.shoot(6)
+      expect(frame.max_next_value).to eq(4)
+    end
+
+    it "returns 8 if we have 2 in the first shoot" do
+      frame.shoot(2)
+      expect(frame.max_next_value).to eq(8)
+    end
+
+    it "returns 0 if we have 10 in the first shoot" do
+      frame.shoot(10)
+      expect(frame.max_next_value).to eq(0)
     end
   end
 end
