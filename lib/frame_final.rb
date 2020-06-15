@@ -1,4 +1,6 @@
-require "./lib/validate"
+# frozen_string_literal: true
+
+require './lib/validate'
 
 class FrameFinal
   attr_accessor :score
@@ -9,9 +11,10 @@ class FrameFinal
   end
 
   def shoot(s)
-    s = 0 if s == "F"
+    s = 0 if s == 'F'
     validator = Validate.new(s, "min:0|max:#{max_next_value}|number")
     return false if !validator.valid? || !available_trows?
+
     @values.push s
   end
 
@@ -40,7 +43,6 @@ class FrameFinal
   def third_shoot_valid
     @values[1] && (has_first_strike || has_spare)
   end
-
 
   def has_second_strike
     @values[1] && @values[1] == 10

@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - "Guardfile"
+    - "Rakefile"
+  Documentation:
+    Enabled: false

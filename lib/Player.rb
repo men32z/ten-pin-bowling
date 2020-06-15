@@ -1,13 +1,11 @@
+# frozen_string_literal: true
+
 class Player
-  @@id = 0;
+  @@id = 0
   attr_accessor :id, :name
   def initialize(name = false)
-    @@id +=1
+    @@id += 1
     self.id = @@id
-    if name
-      self.name = name
-    else
-      self.name = 'player' + self.id.to_s
-    end
+    self.name = (name || 'player' + id.to_s)
   end
 end

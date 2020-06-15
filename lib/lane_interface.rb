@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LaneInterface
   def initialize(lane)
     @lane = lane

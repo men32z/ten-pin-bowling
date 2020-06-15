@@ -1,4 +1,6 @@
-require "./lib/throw"
+# frozen_string_literal: true
+
+require './lib/throw'
 
 class GameData
   attr_reader :players, :throws
