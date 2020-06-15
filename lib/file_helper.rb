@@ -1,4 +1,4 @@
-class FileHelper
+module FileHelper
   def self.read(file, error = [])
     arr = []
     begin
