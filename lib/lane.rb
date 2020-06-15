@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/frame'
 require './lib/frame_final'
 
@@ -34,12 +36,12 @@ class Lane
     else
       set_second(8, f, s)
     end
-    @frames[9].score = f + s + last_score(9) if (f && s && f + s < 10)
-    @frames[9].score = f + s + t + last_score(9) if (f && s && t && f + s > 10)
+    @frames[9].score = f + s + last_score(9) if f && s && f + s < 10
+    @frames[9].score = f + s + t + last_score(9) if f && s && t && f + s > 10
   end
 
   def last_score(cfi)
-    ((cfi - 1 >= 0) ? @frames[cfi - 1].score : 0)
+    (cfi - 1 >= 0 ? @frames[cfi - 1].score : 0)
   end
 
   def current_frame_index
@@ -51,6 +53,7 @@ class Lane
   end
 
   private
+
   def check_frame
     if !current_frame.available_trows? && @frames.count < 10
       @frames.push last_frame? ? FrameFinal.new : Frame.new

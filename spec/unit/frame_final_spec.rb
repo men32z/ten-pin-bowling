@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 RSpec.describe FrameFinal do
-  let(:onlyframe ) { FrameFinal.new }
+  let(:onlyframe) { FrameFinal.new }
   let(:frame) { FrameInterface.new(FrameFinal.new) }
   let(:frame2) { FrameInterface.new(FrameFinal.new) }
   let(:frame3) { FrameInterface.new(FrameFinal.new) }
@@ -11,7 +13,7 @@ RSpec.describe FrameFinal do
   end
 
   describe '#shoot' do
-    it "has minimun 0 and max 10, validations" do
+    it 'has minimun 0 and max 10, validations' do
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(0)).to be_truthy
       expect(frame.get_values).to eq([5, 0])
@@ -24,33 +26,33 @@ RSpec.describe FrameFinal do
       expect(frame3.get_values).to eq([10])
     end
 
-    it "should show F as 0" do
-      expect(frame.shoot("F")).to be_truthy
+    it 'should show F as 0' do
+      expect(frame.shoot('F')).to be_truthy
       expect(frame.get_values).to eq([0])
     end
 
-    it "should allow 3 shoots if first 2 are spare" do
+    it 'should allow 3 shoots if first 2 are spare' do
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(10)).to be_truthy
       expect(frame.get_values).to eq([5, 5, 10])
     end
 
-    it "should allow 3 strikes" do
+    it 'should allow 3 strikes' do
       expect(frame.shoot(10)).to be_truthy
       expect(frame.shoot(10)).to be_truthy
       expect(frame.shoot(10)).to be_truthy
       expect(frame.get_values).to eq([10, 10, 10])
     end
 
-    it "should allow strike and two shoots" do
+    it 'should allow strike and two shoots' do
       expect(frame.shoot(10)).to be_truthy
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(4)).to be_truthy
       expect(frame.get_values).to eq([10, 5, 4])
     end
 
-    it "should allow strike and spare" do
+    it 'should allow strike and spare' do
       expect(frame.shoot(10)).to be_truthy
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(5)).to be_truthy
@@ -64,7 +66,7 @@ RSpec.describe FrameFinal do
       expect(frame.get_values).to eq([10, 5])
     end
 
-    it "should allow just 2 shoots if they are less than 10" do
+    it 'should allow just 2 shoots if they are less than 10' do
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(4)).to be_truthy
       expect(frame.shoot(10)).to_not be_truthy
@@ -72,39 +74,39 @@ RSpec.describe FrameFinal do
     end
   end
 
-  describe "#available_trows?" do
+  describe '#available_trows?' do
     it "returns true if we haven't  shoot" do
       expect(frame.available_trows?).to be_truthy
     end
-    it "returns true if we have one shoot" do
+    it 'returns true if we have one shoot' do
       frame.shoot(5)
       expect(frame.available_trows?).to be_truthy
     end
-    it "returns true if we have two shoots and they are spare" do
+    it 'returns true if we have two shoots and they are spare' do
       frame.shoot(5)
       frame.shoot(5)
       expect(frame.available_trows?).to be_truthy
     end
-    it "returns false if we have two shoots and they are not spare" do
+    it 'returns false if we have two shoots and they are not spare' do
       frame.shoot(5)
       frame.shoot(4)
       expect(frame.available_trows?).to_not be_truthy
     end
-    it "returns true if we have two strikes" do
+    it 'returns true if we have two strikes' do
       frame.shoot(10)
       frame.shoot(10)
       expect(frame.available_trows?).to be_truthy
     end
-    it "returns true if we have one strike in the one shoot" do
+    it 'returns true if we have one strike in the one shoot' do
       frame.shoot(10)
       expect(frame.available_trows?).to be_truthy
     end
-    it "returns true if we have one strike in the first shoot" do
+    it 'returns true if we have one strike in the first shoot' do
       frame.shoot(10)
       frame.shoot(5)
       expect(frame.available_trows?).to be_truthy
     end
-    it "returns false if we have three shoots done anyway" do
+    it 'returns false if we have three shoots done anyway' do
       frame.shoot(5)
       frame.shoot(5)
       frame.shoot(5)
@@ -112,35 +114,35 @@ RSpec.describe FrameFinal do
     end
   end
 
-  describe "#max_next_value" do
-    it "returns 4 if we have 6 in the first shoot" do
+  describe '#max_next_value' do
+    it 'returns 4 if we have 6 in the first shoot' do
       frame.shoot(6)
       expect(frame.max_next_value).to eq(4)
     end
 
-    it "returns 8 if we have 2 in the first shoot" do
+    it 'returns 8 if we have 2 in the first shoot' do
       frame.shoot(2)
       expect(frame.max_next_value).to eq(8)
     end
 
-    it "returns 10 if we have 10 in the first shoot" do
+    it 'returns 10 if we have 10 in the first shoot' do
       frame.shoot(10)
       expect(frame.max_next_value).to eq(10)
     end
 
-    it "returns 6 if we have 10 in the first shoot and 4 in the second shoot" do
+    it 'returns 6 if we have 10 in the first shoot and 4 in the second shoot' do
       frame.shoot(10)
       frame.shoot(4)
       expect(frame.max_next_value).to eq(6)
     end
 
-    it "returns 10 if we have 10 in the first shoot and 10 in the second shoot" do
+    it 'returns 10 if we have 10 in the first shoot and 10 in the second shoot' do
       frame.shoot(10)
       frame.shoot(10)
       expect(frame.max_next_value).to eq(10)
     end
 
-    it "returns 10 if we have a spare" do
+    it 'returns 10 if we have a spare' do
       frame.shoot(6)
       frame.shoot(4)
       expect(frame.max_next_value).to eq(10)

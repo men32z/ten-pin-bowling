@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 task :test do
-  sh "rspec"
+  sh 'rspec'
 end
 
 task :start do
-  sh "ruby ./bin/main.rb"
+  sh 'ruby ./bin/main.rb'
 end

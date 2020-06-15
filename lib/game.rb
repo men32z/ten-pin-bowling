@@ -1,5 +1,7 @@
-require "./lib/lane"
-require "./lib/player"
+# frozen_string_literal: true
+
+require './lib/lane'
+require './lib/player'
 
 class Game
   attr_reader :lanes
@@ -11,6 +13,6 @@ class Game
   end
 
   def insert(player_string, shoot)
-     @lanes.find {|x| x.user.name == player_string}.shoot(shoot)
+    @lanes.find { |x| x.user.name == player_string }.shoot(shoot)
   end
 end
