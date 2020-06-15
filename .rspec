@@ -1,0 +1,7 @@
+--require spec_helper
+--require ./lib/player
+--require ./lib/lane
+--require ./lib/lane_interface
+--require ./lib/frame_final
+--require ./lib/frame_interface
+--require ./lib/validate
