@@ -28,7 +28,7 @@ if file
     # pinfalls and scores
     pt = "Pinfalls "
     sc = "Score\t"
-    9.times do |i|
+    (l.frames.count - 1).times do |i|
       f = l.frames[i]
       if f.get_values[0] == 10
         pt += "  X\t"
@@ -39,13 +39,15 @@ if file
       end
       sc += "#{f.score}\t"
     end
-    v = l.frames[9].get_values
-    # last item
-    pt += "#{v[0] == 10 ? 'X ': v[0]+' '}"
-    pt += "#{v[1] == 10 ? 'X ': (v[1] + v[0] == 10 ? '/ ': "#{v[1]} ")}"
-    pt += "#{v[2] == 10 ? 'X ': (v[2] + v[1] == 10 ? '/ ': "#{v[2]} ")}"
+    if l.frames[9]
+      v = l.frames[9].get_values
+      # last item
+      pt += "#{v[0] == 10 ? 'X ': "#{v[0]} "}"
+      pt += "#{v[1] == 10 ? 'X ': (v[1] + v[0] == 10 ? '/ ': "#{v[1]} ")}"
+      pt += "#{v[2] == 10 ? 'X ': (v[2] + v[1] == 10 ? '/ ': "#{v[2]} ")}" if v[2]
 
-    sc += "#{l.frames[9].score}\t"
+      sc += "#{l.frames[9].score}\t"
+    end
 
     puts pt
     puts sc
