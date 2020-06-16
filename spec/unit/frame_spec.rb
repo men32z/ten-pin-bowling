@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe Frame do
   let(:onlyframe) { Frame.new }
   let(:frame) { FrameInterface.new(Frame.new) }

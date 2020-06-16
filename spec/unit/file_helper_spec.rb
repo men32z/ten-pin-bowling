@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require './lib/file_helper'
 
 RSpec.describe FileHelper do

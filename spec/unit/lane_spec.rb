@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe Lane do
   let(:lane) { Lane.new(Player.new) }
   let(:laneInterfaced) { LaneInterface.new(Lane.new(Player.new)) }
@@ -30,7 +28,7 @@ RSpec.describe Lane do
     end
   end
 
-  describe '#set_score' do
+  describe '#score' do
     it 'sets a basic non spare score' do
       expect(lane.frames[0].get_values).to eq([])
       expect(lane.frames[0].score).to_not be_truthy

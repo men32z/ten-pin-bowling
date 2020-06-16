@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Player
   @@id = 0
   attr_accessor :id, :name

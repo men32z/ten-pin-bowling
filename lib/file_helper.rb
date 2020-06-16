@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module FileHelper
   def self.read(file, error = [])
     arr = []

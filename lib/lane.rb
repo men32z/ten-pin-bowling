@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require './lib/frame'
 require './lib/frame_final'
 
@@ -12,10 +10,10 @@ class Lane
 
   def throw(t)
     check_frame
-    set_score(current_frame_index)  if current_frame.shoot(t)
+    score(current_frame_index) if current_frame.shoot(t)
   end
 
-  def set_score(cfi)
+  def score(cfi)
     return set_last_score if cfi == 9
 
     f = @frames[cfi].get_values[0]
@@ -64,17 +62,17 @@ class Lane
     @frames.count == 9
   end
 
-  def set_second(cfi, f, s)
-    if cfi >= 0 && !@frames[cfi].score && (s || !@frames[cfi].has_first_strike)
-      @frames[cfi].score = f + 10 + last_score(cfi) + (@frames[cfi].has_first_strike ? s : 0)
-    end
+  def set_second(cfi, first, second)
+    return unless cfi >= 0 && !@frames[cfi].score && (second || !@frames[cfi].has_first_strike)
+
+    @frames[cfi].score = first + 10 + last_score(cfi) + (@frames[cfi].has_first_strike ? second : 0)
   end
 
-  def set_third(cfi, f)
-    if cfi >= 0 && !@frames[cfi].score
-      add = @frames[cfi + 1].get_values[0] == 10 ? 10 : 0
-      add += @frames[cfi].get_values[0] == 10 ? 10 : 0
-      @frames[cfi].score = f + add + last_score(cfi)
-    end
+  def set_third(cfi, first)
+    return unless cfi >= 0 && !@frames[cfi].score
+
+    add = @frames[cfi + 1].get_values[0] == 10 ? 10 : 0
+    add += @frames[cfi].get_values[0] == 10 ? 10 : 0
+    @frames[cfi].score = first + add + last_score(cfi)
   end
 end

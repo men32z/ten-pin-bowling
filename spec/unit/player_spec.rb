@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe Player do
   let(:player) { Player.new }
   describe '#initialize' do

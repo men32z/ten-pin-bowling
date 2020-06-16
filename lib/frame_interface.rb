@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class FrameInterface
   # interface duck typing
   def initialize(frame)
