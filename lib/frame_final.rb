@@ -2,22 +2,19 @@ require './lib/validate'
 
 class FrameFinal
   attr_accessor :score
+  attr_reader :values
 
   def initialize
     @values = []
     @score = false
   end
 
-  def shoot(s)
-    s = 0 if s == 'F'
-    validator = Validate.new(s, "min:0|max:#{max_next_value}|number")
+  def shoot(shoot)
+    shoot = 0 if shoot == 'F'
+    validator = Validate.new(shoot, "min:0|max:#{max_next_value}|number")
     return false if !validator.valid? || !available_trows?
 
-    @values.push s
-  end
-
-  def get_values
-    @values
+    @values.push shoot
   end
 
   def available_trows?
@@ -26,27 +23,27 @@ class FrameFinal
 
   def max_next_value
     max = 10 - @values.sum
-    max += 10 if has_first_strike
-    max += 10 if has_second_strike
-    max += 10 if has_spare
+    max += 10 if first_strike?
+    max += 10 if second_strike?
+    max += 10 if spare?
     max
   end
 
-  def has_first_strike
+  def first_strike?
     @values[0] && @values[0] == 10
   end
 
   private
 
   def third_shoot_valid
-    @values[1] && (has_first_strike || has_spare)
+    @values[1] && (first_strike? || spare?)
   end
 
-  def has_second_strike
+  def second_strike?
     @values[1] && @values[1] == 10
   end
 
-  def has_spare
+  def spare?
     @values[1] && @values[0] + @values[1] == 10
   end
 end

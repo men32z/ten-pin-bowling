@@ -9,7 +9,7 @@ module FileHelper
       end
       f.close
       arr
-    rescue Exception => e
+    rescue StandardError => e
       error.push e
       false
     end

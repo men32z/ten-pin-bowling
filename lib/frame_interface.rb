@@ -4,12 +4,12 @@ class FrameInterface
     @frame = frame
   end
 
-  def shoot(s)
-    @frame.shoot(s)
+  def shoot(shoot)
+    @frame.shoot(shoot)
   end
 
-  def get_values
-    @frame.get_values
+  def values
+    @frame.values
   end
 
   def max_next_value
