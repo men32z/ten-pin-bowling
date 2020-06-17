@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require './lib/throw'
 
 class GameData
@@ -11,7 +9,8 @@ class GameData
 
   def format(format)
     @data.each do |x|
-      @throws.push(Throw.new(*x.split(format)))
+      vals = *x.split(format)
+      @throws.push(Throw.new(vals[0].strip, vals[1].strip))
     end
 
     @players = @throws.uniq(&:name).map(&:name)

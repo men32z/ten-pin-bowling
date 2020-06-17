@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe Frame do
   let(:onlyframe) { Frame.new }
   let(:frame) { FrameInterface.new(Frame.new) }
@@ -16,27 +14,27 @@ RSpec.describe Frame do
     it 'has minimun 0 and max 10, validations' do
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(0)).to be_truthy
-      expect(frame.get_values).to eq([5, 0])
+      expect(frame.values).to eq([5, 0])
 
       expect(frame2.shoot(11)).to_not be_truthy
       expect(frame2.shoot(-1)).to_not be_truthy
-      expect(frame2.get_values).to eq([])
+      expect(frame2.values).to eq([])
 
       expect(frame3.shoot(10)).to be_truthy
-      expect(frame3.get_values).to eq([10])
+      expect(frame3.values).to eq([10])
     end
 
     it 'should show F as 0' do
       expect(frame.shoot('F')).to be_truthy
-      expect(frame.get_values).to eq([0])
+      expect(frame.values).to eq([0])
     end
 
     it 'should have a max of 10 points per frame' do
       expect(frame.shoot(5)).to be_truthy
       expect(frame.shoot(6)).to_not be_truthy
-      expect(frame.get_values).to eq([5])
+      expect(frame.values).to eq([5])
       expect(frame.shoot(5)).to be_truthy
-      expect(frame.get_values).to eq([5, 5])
+      expect(frame.values).to eq([5, 5])
     end
   end
 

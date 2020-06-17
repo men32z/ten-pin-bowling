@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe Lane do
   let(:lane) { Lane.new(Player.new) }
   let(:laneInterfaced) { LaneInterface.new(Lane.new(Player.new)) }
@@ -13,26 +11,26 @@ RSpec.describe Lane do
 
   describe '#throw' do
     it 'sets a throw in the current_frame if is available' do
-      expect(lane.current_frame.get_values).to eq([])
+      expect(lane.current_frame.values).to eq([])
       lane.throw(5)
-      expect(lane.current_frame.get_values).to eq([5])
+      expect(lane.current_frame.values).to eq([5])
     end
 
     it 'sets a trow in the next frame if is first is not available.' do
-      expect(lane.current_frame.get_values).to eq([])
+      expect(lane.current_frame.values).to eq([])
       lane.throw(5)
       lane.throw(5)
-      expect(lane.current_frame.get_values).to eq([5, 5])
+      expect(lane.current_frame.values).to eq([5, 5])
       lane.throw(5)
-      expect(lane.current_frame.get_values).to eq([5])
-      expect(lane.frames[0].get_values).to eq([5, 5])
-      expect(lane.frames[1].get_values).to eq([5])
+      expect(lane.current_frame.values).to eq([5])
+      expect(lane.frames[0].values).to eq([5, 5])
+      expect(lane.frames[1].values).to eq([5])
     end
   end
 
-  describe '#set_score' do
+  describe '#score' do
     it 'sets a basic non spare score' do
-      expect(lane.frames[0].get_values).to eq([])
+      expect(lane.frames[0].values).to eq([])
       expect(lane.frames[0].score).to_not be_truthy
       lane.throw(3)
       expect(lane.frames[0].score).to_not be_truthy
@@ -41,19 +39,19 @@ RSpec.describe Lane do
     end
 
     it 'sets a spare and a five' do
-      expect(lane.frames[0].get_values).to eq([])
+      expect(lane.frames[0].values).to eq([])
       lane.throw(5)
       lane.throw(5)
-      expect(lane.frames[0].get_values).to eq([5, 5])
+      expect(lane.frames[0].values).to eq([5, 5])
       expect(lane.frames[0].score).to_not be_truthy
       lane.throw(5)
       expect(lane.frames[0].score).to eq(15)
     end
 
     it '3 strikes scenario' do
-      expect(lane.frames[0].get_values).to eq([])
+      expect(lane.frames[0].values).to eq([])
       lane.throw(10)
-      expect(lane.frames[0].get_values).to eq([10])
+      expect(lane.frames[0].values).to eq([10])
       expect(lane.frames[0].score).to_not be_truthy
       lane.throw(10)
       expect(lane.frames[0].score).to_not be_truthy
@@ -62,17 +60,17 @@ RSpec.describe Lane do
     end
 
     it 'strike and spare scenario' do
-      expect(lane.frames[0].get_values).to eq([])
+      expect(lane.frames[0].values).to eq([])
       lane.throw(10)
       lane.throw(5)
-      expect(lane.frames[0].get_values).to eq([10])
+      expect(lane.frames[0].values).to eq([10])
       expect(lane.frames[0].score).to_not be_truthy
       lane.throw(5)
       expect(lane.frames[0].score).to eq(20)
     end
 
     it 'strike and non spare scenario' do
-      expect(lane.frames[0].get_values).to eq([])
+      expect(lane.frames[0].values).to eq([])
       lane.throw(10)
       lane.throw(1)
       expect(lane.frames[0].score).to_not be_truthy

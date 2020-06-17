@@ -1,11 +1,6 @@
-# frozen_string_literal: true
-
 class Player
-  @@id = 0
-  attr_accessor :id, :name
+  attr_accessor :name
   def initialize(name = false)
-    @@id += 1
-    self.id = @@id
-    self.name = (name || 'player' + id.to_s)
+    @name = (name || 'player' + rand(1..99_999_999).to_s)
   end
 end

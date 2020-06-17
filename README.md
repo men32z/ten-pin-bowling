@@ -2,6 +2,7 @@
 
 > An app that helps to show ten-pin bowling scores
 
+![screenshot](https://raw.githubusercontent.com/men32z/ten-pin-bowling/develop/docs/sc.png)
 
 ## Built With
 

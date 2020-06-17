@@ -1,10 +1,7 @@
-# frozen_string_literal: true
-
 class Validate
-  # available methods
-  @@a_m = %w[min max number]
-
   def initialize(item, validation)
+    # available methods
+    @a_m = %w[min max number]
     @current_item = item
     @validations = format(validation)
     @current_validation = 0
@@ -14,7 +11,7 @@ class Validate
     result = true
     @validations.each do |v|
       @current_validation = v[1] if v[1]
-      result &&= send(v[0]) if v[0] && Validate.private_method_defined?(v[0]) && @@a_m.include?(v[0])
+      result &&= send(v[0]) if v[0] && Validate.private_method_defined?(v[0]) && @a_m.include?(v[0])
     end
     result
   end

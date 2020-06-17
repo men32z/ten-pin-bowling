@@ -1,19 +1,17 @@
-# frozen_string_literal: true
-
 class LaneInterface
   def initialize(lane)
     @lane = lane
   end
 
-  def throw(t)
-    @lane.throw(t)
+  def throw(throw)
+    @lane.throw(throw)
   end
 
-  def set_score(current_frame_index)
-    @lane.set_score(current_frame_index)
+  def score(current_frame_index)
+    @lane.score(current_frame_index)
   end
 
-  def get_frames
+  def frames
     @lane.frames
   end
 
