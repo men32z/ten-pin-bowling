@@ -8,7 +8,7 @@ RSpec.describe 'Two players Scenario' do
     before(:each) do
       file = FileHelper.read('./spec/fixtures/example_default.txt')
       data = GameData.new(file)
-      data.format(' ')
+      data.format("\t")
       @game = Game.new(data.players)
       @game.make_throws(data)
     end

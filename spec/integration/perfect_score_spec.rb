@@ -8,7 +8,7 @@ RSpec.describe 'Perfect Scenario' do
     before(:each) do
       file = FileHelper.read('./spec/fixtures/all_10.txt')
       data = GameData.new(file)
-      data.format(' ')
+      data.format("\t")
       @game = Game.new(data.players)
       @game.make_throws(data)
     end

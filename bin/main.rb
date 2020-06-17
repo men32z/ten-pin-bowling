@@ -10,7 +10,7 @@ file = FileHelper.read(f == 'def' ? './docs/example.txt' : f)
 if file
   puts 'staring game'
   data = GameData.new(file)
-  data.format(' ')
+  data.format("\t")
   game = Game.new(data.players)
   game.make_throws(data)
 
