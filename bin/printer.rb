@@ -1,8 +1,8 @@
 class Printer
   class << self
     def print(game)
-      pt = "Frame\t"
-      10.times { |i| pt += "#{i + 1}\t" }
+      pt = "Frame\t\t"
+      10.times { |i| pt += "#{i + 1}\t\t" }
       pt += "\n"
 
       game.lanes.each do |l|
@@ -14,21 +14,21 @@ class Printer
     end
 
     def print_lane(lane)
-      pt = 'Pinfalls '
-      sc = "Score\t"
+      pt = "Pinfalls\t"
+      sc = "Score\t\t"
       (lane.frames.count - 1).times do |i|
         f = lane.frames[i]
         pt += if f.values[0] == 10
-                "  X\t"
+                "\tX\t"
               elsif f.values.sum == 10
-                "#{f.values[0]} /\t"
+                "#{f.values[0]}\t/\t"
               else
-                "#{f.values[0]} #{f.values[1]}\t"
+                "#{f.values[0]}\t#{f.values[1]}\t"
               end
-        sc += "#{f.score}\t"
+        sc += "#{f.score}\t\t"
       end
       pt += last_frame_printing(lane)
-      sc += "#{lane.frames[9].score}\t" if lane.frames[9]
+      sc += lane.frames[9].score.to_s if lane.frames[9]
 
       pt + "\n" + sc
     end
@@ -37,9 +37,9 @@ class Printer
       return unless lane.frames[9]
 
       v = lane.frames[9].values
-      pt = parse_strike(v[0]) + ' ' if v[0]
-      pt += parse_strike(v[1], parse_spare(v[1], v[0])) + ' ' if v[1]
-      pt += parse_strike(v[2], parse_spare(v[2], v[1])) + ' ' if v[2]
+      pt = parse_strike(v[0]) + "\t" if v[0]
+      pt += parse_strike(v[1], parse_spare(v[1], v[0])) + "\t" if v[1]
+      pt += parse_strike(v[2], parse_spare(v[2], v[1])) + "\t" if v[2]
       pt
     end
 

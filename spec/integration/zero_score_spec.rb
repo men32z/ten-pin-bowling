@@ -19,9 +19,9 @@ RSpec.describe 'Zero Score Scenario' do
     end
 
     it 'print in the right format with right data' do
-      right_format = "Frame\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t\nCarl\n"
-      right_format += "Pinfalls 0 0\t0 0\t0 0\t0 0\t0 0\t0 0\t0 0\t0 0\t0 0\t0 0 \n"
-      right_format += "Score\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t\n"
+      right_format = "Frame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10\t\t\nCarl\n"
+      right_format += "Pinfalls\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t0\t\n"
+      right_format += "Score\t\t0\t\t0\t\t0\t\t0\t\t0\t\t0\t\t0\t\t0\t\t0\t\t0\n"
       expect(Printer.print(@game)).to eq(right_format)
     end
   end
