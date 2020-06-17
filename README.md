@@ -41,7 +41,6 @@ rake test
 
 ## Upcoming Features?
 
-- Integration tests
 - Messages on errors
 
 ## Authors
