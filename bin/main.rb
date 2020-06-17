@@ -14,7 +14,7 @@ if file
   game = Game.new(data.players)
   game.make_throws(data)
 
-  Printer.print(game)
+  puts Printer.print(game)
 else
   puts "wrong file or doesn't exist"
 end

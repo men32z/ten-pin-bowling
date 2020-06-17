@@ -3,13 +3,14 @@ class Printer
     def print(game)
       pt = "Frame\t"
       10.times { |i| pt += "#{i + 1}\t" }
-      puts pt
+      pt += "\n"
 
       game.lanes.each do |l|
-        puts l.player.name
+        pt += l.player.name + "\n"
         # pinfalls and scores
-        print_lane(l)
+        pt += print_lane(l) + "\n"
       end
+      pt
     end
 
     def print_lane(lane)
@@ -28,8 +29,8 @@ class Printer
       end
       pt += last_frame_printing(lane)
       sc += "#{lane.frames[9].score}\t" if lane.frames[9]
-      puts pt
-      puts sc
+
+      pt + "\n" + sc
     end
 
     def last_frame_printing(lane)
